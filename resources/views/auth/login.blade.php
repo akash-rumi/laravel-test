@@ -21,7 +21,7 @@
                 </span>
             @endif
         </div>
-
+        <div>
         <div class="form-group">
             <label>Password</label>
             <input name="password" type="password" required class="form-control{{ $errors->has('password') ? ' is-invalid': '' }}">
