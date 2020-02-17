@@ -16,7 +16,7 @@ class AddUserToBlogpostsTable extends Migration
         Schema::table('blogposts', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id');
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE')->onUpdate('CASCADE');
         });
     }
 
@@ -28,8 +28,8 @@ class AddUserToBlogpostsTable extends Migration
     public function down()
     {
         Schema::table('blogposts', function (Blueprint $table) {
-            $table->dropForeign('user_id');
-            $table->dropColumn('user_id');
+            $table->dropForeign(['user_id']);
+            $table->dropColumn(['user_id']);
         });
     }
 }
