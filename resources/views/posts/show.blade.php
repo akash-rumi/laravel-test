@@ -16,25 +16,21 @@
     <div class="card">
        <div class="card-body">
             <h2 class="card-title">{{ $post->title }}</h2>
+            <u > Added by {{ $post->user->name }}  at {{ $post->created_at->diffForHumans() }}
+                &#x0007C Updated {{ $post->updated_at->diffForHumans() }}</u>
             <p class="card-text">{{ $post->content }}</p>
-            <div class="row">
-              <div class="col-8">
                 <div class="row">
                     <div class="col-1">
-                        <a href="{{route('post.edit',['post'=>$post->id])}}" type="button" class="btn btn-secondary">Edit</a>
+                        <a href="{{route('post.edit',['post'=>$post->id])}}" type="button" class="btn btn-secondary btn-block">Edit</a>
                     </div>
-                    <div class="col-2">
+                    <div class="col-1">
                         <form method="POST" action="{{ route('post.destroy', ['post' => $post->id]) }}">
                             @csrf
                             @method('DELETE')
-                            <input type="submit" class="btn btn-danger" value="Delete" />
+                            <input type="submit" class="btn btn-danger btn-block" value="Delete" />
                         </form>
                     </div>
                 </div>
-              </div>
-              <div class="col-4">
-                <u> Added {{ $post->created_at->diffForHumans() }}
-                &#x0007C Updated {{ $post->updated_at->diffForHumans() }}</u>
               </div>
             </div>
           </div>
@@ -44,7 +40,7 @@
     <div class="card" style="margin:0px 40px;">
         <div class="card-body">
             @forelse ($post->comments as $comments)
-                <h5 class="card-text">{{ $comments->content }} <u class="text-muted">&#x0007C Added {{ $post->created_at->diffForHumans() }}</u>
+                <h5 class="card-text">{{ $comments->content }} <u>&#x0007C Added {{ $post->created_at->diffForHumans() }}</u>
                 </h5>
                 <hr>
             @empty

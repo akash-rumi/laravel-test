@@ -17,6 +17,11 @@ class BlogPost extends Model
         return $this->hasMany('App\comment');
     }
 
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
     public static function boot()
     {
         parent::boot();

@@ -7,6 +7,7 @@ use App\BlogPost;
 use App\Http\Requests\StorePost;
 use Faker\Provider\Lorem;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
@@ -51,6 +52,11 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = BlogPost::findOrFail($id);
+
+        // if (Gate::denies('update-post', $post)) {
+        //     abort(403, "You Are not Authorized to edit this POST!!");
+        // }
+        $this->authorize('update-post', $post);
         return view('posts.edit', ['post' => $post]);
     }
 
@@ -70,6 +76,10 @@ class PostController extends Controller
     public function destroy(Request $request, $id)
     {
         $post = BlogPost::findOrFail($id);
+        // if (Gate::denies('delete-post', $post)) {
+        //     abort(403, "You Are not Authorized to DELETE this POST!!");
+        // }
+        $this->authorize('delete-post', $post);
         $post->delete();
 
         $request->session()->flash('status', 'Blog Post Is Succesfully Deleted.');
