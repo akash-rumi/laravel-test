@@ -21,14 +21,18 @@
             <p class="card-text">{{ $post->content }}</p>
                 <div class="row">
                     <div class="col-1">
-                        <a href="{{route('post.edit',['post'=>$post->id])}}" type="button" class="btn btn-secondary btn-block">Edit</a>
+                        @can('update', $post)
+                            <a href="{{route('post.edit',['post'=>$post->id])}}" type="button" class="btn btn-secondary btn-block">Edit</a>
+                        @endcan
                     </div>
                     <div class="col-1">
-                        <form method="POST" action="{{ route('post.destroy', ['post' => $post->id]) }}">
-                            @csrf
-                            @method('DELETE')
-                            <input type="submit" class="btn btn-danger btn-block" value="Delete" />
-                        </form>
+                        @can('delete', $post)
+                            <form method="POST" action="{{ route('post.destroy', ['post' => $post->id]) }}">
+                                @csrf
+                                @method('DELETE')
+                                <input type="submit" class="btn btn-danger btn-block" value="Delete" />
+                            </form>
+                        @endcan
                     </div>
                 </div>
               </div>

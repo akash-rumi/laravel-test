@@ -56,7 +56,8 @@ class PostController extends Controller
         // if (Gate::denies('update-post', $post)) {
         //     abort(403, "You Are not Authorized to edit this POST!!");
         // }
-        $this->authorize('update-post', $post);
+        // $this->authorize('update-post', $post);
+        $this->authorize($post);
         return view('posts.edit', ['post' => $post]);
     }
 
@@ -79,7 +80,8 @@ class PostController extends Controller
         // if (Gate::denies('delete-post', $post)) {
         //     abort(403, "You Are not Authorized to DELETE this POST!!");
         // }
-        $this->authorize('delete-post', $post);
+        // $this->authorize('delete-post', $post);
+        $this->authorize($post);
         $post->delete();
 
         $request->session()->flash('status', 'Blog Post Is Succesfully Deleted.');
