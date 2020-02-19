@@ -11,7 +11,7 @@ class BlogPost extends Model
     use SoftDeletes;
 
     protected $table = 'blogposts';
-    protected $fillable = ['title', 'content', 'user_id'];
+    protected $fillable = ['title', 'content', 'user_id', 'created_at'];
 
     public function comments()
     {

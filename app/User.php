@@ -40,6 +40,6 @@ class User extends Authenticatable
 
     public function blogposts()
     {
-        return $this->hasMany(BlogPost::class);
+        return $this->hasMany('App\BlogPost');
     }
 }

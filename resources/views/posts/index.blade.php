@@ -17,7 +17,7 @@
     @forelse ($posts as $post)
         <div class="container">
             <h2><a href="{{ route ('post.show', ['post'=>$post->id]) }}">{{ $post->title }}</a></h2>
-            <u> Added by {{ $post->user->name }}</u><br>
+            <u> Added by {{ $post->user->name }} {{ $post->created_at->diffForHumans() }}</u><br>
             {{ \Illuminate\Support\Str::limit($post->content, 200, $end='...')}} <a href="{{ route ('post.show', ['post'=>$post->id]) }}"><strong> Read More </strong></a>
             <div class="">
                 @if ($post->comments_count)
