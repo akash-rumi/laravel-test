@@ -44,7 +44,7 @@
     <div class="card" style="margin:0px 40px;">
         <div class="card-body">
             @forelse ($post->comments as $comments)
-                <h5 class="card-text">{{ $comments->content }} <u>&#x0007C Added {{ $post->created_at->diffForHumans() }}</u>
+                <h5 class="card-text">{{ $comments->content }} <u>&#x0007C Added {{ $comments->created_at->diffForHumans() }}</u>
                 </h5>
                 <hr>
             @empty

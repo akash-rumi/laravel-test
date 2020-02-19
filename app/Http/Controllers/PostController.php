@@ -22,13 +22,18 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('posts.index', ['posts' => BlogPost::withCount('comments')->get()]);
+        return view('posts.index', ['posts' => BlogPost::latest()->withCount('comments')->get()]);
     }
 
 
 
     public function show($id)
     {
+        // return view('posts.show', [
+        //     'post' => BlogPost::with(['comments' => function ($query) {
+        //         return $query->latest();
+        //     }])->findOrFail($id),
+        // ]);
         return view('posts.show', ['post' => BlogPost::with('comments')->findOrFail($id)]);
     }
 
