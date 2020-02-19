@@ -38,9 +38,12 @@ Route::get('/about', function () {
 //         'welcome'=>$welcomes[$welcome],
 //     ]);
 // })->name('blog-post');
+
+
 Route::get('/', 'HomeController@home')->name('home');
 Route::get('/contact', 'HomeController@contact')->name('contact');
 Route::get('/about', 'HomeController@about')->name('about');
+Route::get('/secret', 'HomeController@secret')->name('secret')->middleware('can:home.secret');
 Route::resource('/post', 'PostController');
 
 Auth::routes();

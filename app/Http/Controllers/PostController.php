@@ -39,6 +39,7 @@ class PostController extends Controller
         $blogpost = new BlogPost();
         $blogpost->title = $request->input('title');
         $blogpost->content = $request->input('content');
+        $blogpost->user_id = $request->user()->id;
         $blogpost->save();
 
         $request->session()->flash('status', 'Blog Post Was Succesfully Created.');
