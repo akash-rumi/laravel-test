@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\BlogPost;
+use App\User;
 use App\Http\Requests\StorePost;
 use Faker\Provider\Lorem;
 use Illuminate\Support\Facades\Redirect;
@@ -22,7 +23,14 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('posts.index', ['posts' => BlogPost::latest()->withCount('comments')->get()]);
+        return view(
+            'posts.index',
+            [
+                'posts' => BlogPost::latest()->withCount('comments')->get(),
+                'mostCommented' => BlogPost::mostCommented()->take(5)->get(),
+                'mostActive' => User::withMostBlogPosts()->take(5)->get(),
+            ]
+        );
     }
 
 
