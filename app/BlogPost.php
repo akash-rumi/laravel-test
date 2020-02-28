@@ -6,6 +6,7 @@ use App\Scopes\LatestScope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Scopes\DeletedAdminScope;
 
 class BlogPost extends Model
 {
@@ -36,6 +37,8 @@ class BlogPost extends Model
 
     public static function boot()
     {
+
+        static::addGlobalScope(new DeletedAdminScope);
         parent::boot();
 
         // static::addGlobalScope(new LatestScope);

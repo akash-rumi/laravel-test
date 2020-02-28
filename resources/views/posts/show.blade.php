@@ -26,13 +26,15 @@
                         @endcan
                     </div>
                     <div class="col-1">
-                        @can('delete', $post)
-                            <form method="POST" action="{{ route('post.destroy', ['post' => $post->id]) }}">
-                                @csrf
-                                @method('DELETE')
-                                <input type="submit" class="btn btn-danger btn-block" value="Delete" />
-                            </form>
-                        @endcan
+                        @if(!$post->trashed())
+                            @can('delete', $post)
+                                <form method="POST" action="{{ route('post.destroy', ['post' => $post->id]) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="submit" class="btn btn-danger btn-block" value="Delete" />
+                                </form>
+                            @endcan
+                        @endif
                     </div>
                 </div>
               </div>

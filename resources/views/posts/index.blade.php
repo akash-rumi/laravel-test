@@ -18,7 +18,13 @@
         <div class="col-8">
             @forelse ($posts as $post)
                 <div class="container">
-                    <h2><a href="{{ route ('post.show', ['post'=>$post->id]) }}">{{ $post->title }}</a></h2>
+                    @if($post->trashed())
+                        <del>
+                    @endif
+                        <h2><a class="{{ $post->trashed() ? 'text-muted' : '' }}" href="{{ route('post.show', ['post' => $post->id]) }}">{{ $post->title }}</a></h2>
+                    @if($post->trashed())
+                        </del>
+                    @endif
                     <u> Added by {{ $post->user->name }} {{ $post->created_at->diffForHumans() }}</u><br>
                     {{ \Illuminate\Support\Str::limit($post->content, 200, $end='...')}} <a href="{{ route ('post.show', ['post'=>$post->id]) }}"><strong> Read More </strong></a>
                     <div class="">
