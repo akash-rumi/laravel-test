@@ -16,8 +16,11 @@
     <div class="card">
        <div class="card-body">
             <h2 class="card-title">{{ $post->title }}</h2>
-            <u > Added by {{ $post->user->name }}  at {{ $post->created_at->diffForHumans() }}
-                &#x0007C Updated {{ $post->updated_at->diffForHumans() }}</u>
+            @updated(['date' => $post->created_at, 'name' => $post->user->name]) 
+            @endupdated 
+            @updated(['date' => $post->created_at, 'name' => $post->user->name]) 
+                &#x0007C Updated
+            @endupdated
             <p class="card-text">{{ $post->content }}</p>
                 <div class="row">
                     <div class="col-1">
@@ -46,7 +49,9 @@
     <div class="card" style="margin:0px 40px;">
         <div class="card-body">
             @forelse ($post->comments as $comments)
-                <h5 class="card-text">{{ $comments->content }} <u>&#x0007C Added {{ $comments->created_at->diffForHumans() }}</u>
+                <h5 class="card-text">{{ $comments->content }} &#x0007C 
+                    @updated(['date' => $comments->created_at]) 
+                    @endupdated 
                 </h5>
                 <hr>
             @empty
