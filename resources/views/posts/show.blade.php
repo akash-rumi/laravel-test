@@ -22,6 +22,7 @@
                 &#x0007C Updated
             @endupdated
             <p class="card-text">{{ $post->content }}</p>
+            <u class="float-right">Currently read by {{ $counter }} people</u>
                 <div class="row">
                     <div class="col-1">
                             @auth
