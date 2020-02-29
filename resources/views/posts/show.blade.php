@@ -18,25 +18,29 @@
             <h2 class="card-title">{{ $post->title }}</h2>
             @updated(['date' => $post->created_at, 'name' => $post->user->name]) 
             @endupdated 
-            @updated(['date' => $post->created_at, 'name' => $post->user->name]) 
+            @updated(['date' => $post->updated_at, 'name' => $post->user->name]) 
                 &#x0007C Updated
             @endupdated
             <p class="card-text">{{ $post->content }}</p>
                 <div class="row">
                     <div class="col-1">
-                        @can('update', $post)
-                            <a href="{{route('post.edit',['post'=>$post->id])}}" type="button" class="btn btn-secondary btn-block">Edit</a>
-                        @endcan
+                            @auth
+                                @can('update', $post)
+                                    <a href="{{route('post.edit',['post'=>$post->id])}}" type="button" class="btn btn-secondary btn-block">Edit</a>
+                                @endcan
+                            @endauth
                     </div>
                     <div class="col-1">
                         @if(!$post->trashed())
-                            @can('delete', $post)
-                                <form method="POST" action="{{ route('post.destroy', ['post' => $post->id]) }}">
-                                    @csrf
-                                    @method('DELETE')
-                                    <input type="submit" class="btn btn-danger btn-block" value="Delete" />
-                                </form>
-                            @endcan
+                            @auth
+                                @can('delete', $post)
+                                    <form method="POST" action="{{ route('post.destroy', ['post' => $post->id]) }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <input type="submit" class="btn btn-danger btn-block" value="Delete" />
+                                    </form>
+                                @endcan
+                            @endauth
                         @endif
                     </div>
                 </div>
