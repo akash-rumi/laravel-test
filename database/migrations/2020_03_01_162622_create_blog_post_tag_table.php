@@ -13,7 +13,7 @@ class CreateBlogpostTagTable extends Migration
      */
     public function up()
     {
-        Schema::create('blogpost_tag', function (Blueprint $table) {
+        Schema::create('blog_post_tag', function (Blueprint $table) {
             $table->bigIncrements('id');
 
             $table->unsignedBigInteger('blog_post_id')->index();
@@ -33,6 +33,6 @@ class CreateBlogpostTagTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blogpost_tag');
+        Schema::dropIfExists('blog_post_tag');
     }
 }
