@@ -11,6 +11,7 @@
     @if(session()->has('status'))
         <div class="alert alert-success" role="alert">
             {{ session()->get('status') }}
+        </div>
     @endif  
     <div class="row">
         <div class="col-8">
@@ -51,11 +52,12 @@
             </div>
             </div>
             <h3 class="card-title" style="margin:0px 40px">Comments</h3>
+            @include('comments._form')
             <div class="card" style="margin:0px 0px 0px 40px;">
                 <div class="card-body">
-                    @forelse ($post->comments as $comments)
-                        <h5 class="card-text">{{ $comments->content }} &#x0007C 
-                            @updated(['date' => $comments->created_at]) 
+                    @forelse ($post->comments as $comment)
+                        <h5 class="card-text">{{ $comment->content }} &#x0007C 
+                            @updated(['date' => $comment->created_at , 'name' => $comment->user->name]) 
                             @endupdated 
                         </h5>
                         <hr>
