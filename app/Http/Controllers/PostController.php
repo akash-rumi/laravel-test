@@ -6,10 +6,12 @@ use Illuminate\Http\Request;
 use App\BlogPost;
 use App\User;
 use App\Http\Requests\StorePost;
+use App\Image;
 use Faker\Provider\Lorem;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -91,6 +93,11 @@ class PostController extends Controller
         $blogpost->user_id = $request->user()->id;
         $blogpost->save();
 
+        if ($request->hasFile('thumbnail')) {
+            $path = $request->file('thumbnail')->store('public/thumbnails');
+            $blogpost->image()->save(Image::create(['path' => $path]));
+        }
+
         $request->session()->flash('status', 'Blog Post Was Succesfully Created.');
         return redirect()->route('post.show', ['post' => $blogpost->id]);
     }
@@ -119,7 +126,16 @@ class PostController extends Controller
         $post->fill($validatedData);
 
         $post->save();
-
+        if ($request->hasFile('thumbnail')) {
+            $path = $request->file('thumbnail')->store('public/thumbnails');
+            if ($post->image) {
+                Storage::delete($post->image->path);
+                $post->image->path = $path;
+                $post->image->save();
+            } else {
+                $post->image()->save(Image::create(['path' => $path]));
+            }
+        }
         $request->session()->flash('status', 'Blog Post Is Succesfully Updated.');
         return redirect()->route('post.show', ['post' => $post->id]);
     }

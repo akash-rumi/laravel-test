@@ -31,6 +31,10 @@ class BlogPost extends Model
         return $this->belongsToMany('App\Tag')->withTimestamps();
     }
 
+    public function image()
+    {
+        return $this->hasOne('App\Image');
+    }
     public function scopeLatestWithRelations(Builder $query)
     {
         return $query->latest()->withCount('comments')->with('user')->with('tag');

@@ -9,7 +9,7 @@
 @endsection
 @section('content')
     @error @enderror
-    <form method="POST" action="{{ route('post.store') }}">
+    <form method="POST" action="{{ route('post.store') }}" enctype="multipart/form-data">
         @csrf
 
         @include('posts._form')

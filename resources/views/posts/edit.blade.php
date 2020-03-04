@@ -15,7 +15,7 @@
             @endforeach
         </div>
     @endif
-    <form method="POST" action="{{ route('post.update',['post'=>$post->id]) }}">
+    <form method="POST" action="{{ route('post.update',['post'=>$post->id]) }}" enctype="multipart/form-data">
         @csrf
 
         @method('PUT')

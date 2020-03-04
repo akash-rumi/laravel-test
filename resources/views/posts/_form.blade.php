@@ -6,3 +6,7 @@
     <label>Content</label>
     <textarea class="form-control" rows="7" name="content"> {{old('content',$post->content??null)}}</textarea>
 </div>
+<div class="form-group">
+    <label>Thumbnail</label>
+    <input type="file" name="thumbnail" class="form-control-file"/>
+</div>
