@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateUSer;
+use App\Image;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -72,9 +74,23 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(UpdateUSer $request, User $user)
     {
-        //
+        if ($request->hasFile('avatar')) {
+            $path = $request->file('avatar')->store('public/avatars');
+
+            if ($user->image) {
+                $user->image->path = $path;
+                $user->image->save();
+            } else {
+                $user->image()->save(
+                    Image::make(['path' => $path])
+                );
+            }
+        }
+
+        $request->session()->flash('status', 'User Is Succesfully Updated.');
+        return redirect()->route('user.show', ['user' => $user->id]);
     }
 
     /**

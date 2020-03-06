@@ -8,6 +8,7 @@
     Profile
 @endsection
 @section('content')
+    @error @enderror
     <form method="POST" enctype="multipart/form-data"
         action="{{ route('user.update', ['user' => $user->id]) }}"
         class="form-horizontal">
@@ -18,7 +19,7 @@
         <div class="card container">
             <div class="row">
                 <div class="col-4 mt-4">
-                    <img class="card-img-top" src="..." alt="Card image cap">
+                    <img class="card-img-top" src="{{ $user->image ? $user->image->url() : '' }}" alt="Card image cap">
     
                     <div class="card mt-4">
                         <div class="card-body">
@@ -32,7 +33,6 @@
                         <label>Name:</label>
                         <input class="form-control"  type="text" name="name" value="{{$user->name}}"/>
                     </div>
-    
                     <div class="form-group">
                         <input type="submit" class="btn btn-success" value="Update" />
                     </div>

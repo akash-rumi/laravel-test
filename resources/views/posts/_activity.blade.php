@@ -27,7 +27,7 @@
         @slot('items')
             @foreach ($mostActive as $user)
                 <li class="list-group-item">
-                    {{ $user->name }} 
+                    <a href="{{ route('user.show', ['user' => $user->id]) }}"> {{ $user->name }} </a>
                     @if ($user->blogposts_count)
                         ( {{$user->blogposts_count}} Posts)
                     @else
@@ -46,7 +46,7 @@
         @slot('items')
             @foreach ($mostActiveLastMonth as $user)
                 <li class="list-group-item">
-                    {{ $user->name }} 
+                    <a href="{{ route('user.show', ['user' => $user->id]) }}"> {{ $user->name }} </a>
                     @if ($user->blogposts_count)
                         ( {{$user->blogposts_count}} Posts)
                     @else
