@@ -20,7 +20,7 @@
                 <h2 class="card-title">{{ $post->title }}</h2>
                 @tags(['tags' => $post->tag])
                 @endtags
-                @updated(['date' => $post->created_at, 'name' => $post->user->name]) 
+                @updated(['date' => $post->created_at, 'name' => $post->user->name, 'userId' => $post->user->id]) 
                 @endupdated 
                 @updated(['date' => $post->updated_at]) 
                     &#x0007C Updated
