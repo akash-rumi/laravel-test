@@ -4,13 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\BlogPost;
-use App\User;
 use App\Http\Requests\StorePost;
 use App\Image;
-use Faker\Provider\Lorem;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller

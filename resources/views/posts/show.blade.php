@@ -55,20 +55,11 @@
             </div>
             </div>
             <h3 class="card-title" style="margin:0px 40px">Comments</h3>
-            @include('comments._form')
-            <div class="card" style="margin:0px 0px 0px 40px;">
-                <div class="card-body">
-                    @forelse ($post->comments as $comment)
-                        <h5 class="card-text">{{ $comment->content }} &#x0007C 
-                            @updated(['date' => $comment->created_at , 'name' => $comment->user->name]) 
-                            @endupdated 
-                        </h5>
-                        <hr>
-                    @empty
-                        <h4 class="card-title">No Comments Yet.</h4>
-                    @endforelse
-                </div>
-            </div>
+            @commentForm(['route' => route('post.comments.store', ['post' => $post->id])])
+            @endcommentForm
+
+            @commentList(['comments' => $post->comments])
+            @endcommentList
         </div>
         <div class="col-4">
             @include('posts._activity')
