@@ -102,6 +102,11 @@
                         <li class="nav-item active">
                             <a class="navbar-brand" href="{{ route('about') }}">About US</a>
                         </li>
+                        @auth
+                        <li class="nav-item active">
+                            <a  class="navbar-brand" href="{{ route('user.show', ['user'=>Auth::user()->id]) }}"> Profile({{ Auth::user()->name}})</a>
+                        </li>
+                        @endauth
                     </ul>
                     <div class="form-inline my-2 my-lg-0">
                         @guest

@@ -15,7 +15,7 @@ class AddTitleContentToBlogpostsTable extends Migration
     {
         Schema::table('blogposts', function (Blueprint $table) {
             $table->string('title');
-            $table->string('content');
+            $table->longText('content');
         });
     }
 
@@ -27,7 +27,7 @@ class AddTitleContentToBlogpostsTable extends Migration
     public function down()
     {
         Schema::table('blogposts', function (Blueprint $table) {
-            $table->dropColumn(['title','content']);
+            $table->dropColumn(['title', 'content']);
         });
     }
 }

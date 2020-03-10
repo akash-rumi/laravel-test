@@ -32,7 +32,7 @@ class CommentsTableSeeder extends Seeder
         $commentsCount = (int) $this->command->ask('How many Profile Post would you like?', 90);
         factory(App\Comment::class, $commentsCount)->make()->each(function ($comment) use ($user) {
             $comment->commentable_id = $user->random()->id;
-            $comment->commentable_type = 'App\BlogPost';
+            $comment->commentable_type = 'App\User';
             $comment->user_id = $user->random()->id;
             $comment->save();
         });
