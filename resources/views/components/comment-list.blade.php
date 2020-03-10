@@ -3,7 +3,8 @@
         @forelse ($comments as $comment)
             <h5 class="card-text">{{ $comment->content }} &#x0007C 
                 @updated(['date'=>$comment->created_at , 'name'=>$comment->user->name , 'userId'=>$comment->user->id]) 
-                @endupdated 
+                @endupdated
+                @tags(['tags' => $comment->tag])@endtags
             </h5>
             <hr>
         @empty
