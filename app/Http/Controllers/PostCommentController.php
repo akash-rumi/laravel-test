@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\BlogPost;
 use App\Http\Requests\StoreComment;
-use App\Mail\CommentPosted;
+use App\Events\CommentPosted;
 use App\Mail\CommentPostedMarkdown;
 use Illuminate\Support\Facades\Mail;
 

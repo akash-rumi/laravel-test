@@ -11,24 +11,10 @@ use Illuminate\Queue\InteractsWithQueue;
 
 class NotifyUsersAboutComment
 {
-    /**
-     * Create the event listener.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
 
-    /**
-     * Handle the event.
-     *
-     * @param  object  $event
-     * @return void
-     */
     public function handle(CommentPosted $event)
     {
+        // dd('Its done custom event and listener');
         ThrottledMail::dispatch(new CommentPostedMarkdown($event->comment), $event->comment->commentable->user)->onQueue('low');
 
         NotifyUsesPostWasCommented::dispatch($event->comment)->onQueue('high');
